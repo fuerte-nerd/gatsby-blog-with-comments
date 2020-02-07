@@ -3,7 +3,7 @@ import { graphql } from "gatsby"
 
 import Disqus from "disqus-react"
 
-import { Container } from "reactstrap"
+import { Container, Form, Input, Button } from "reactstrap"
 
 import "../components/styles.scss"
 
@@ -38,10 +38,17 @@ export default function Template({
           className="blog-post-content"
           dangerouslySetInnerHTML={{ __html: html }}
         />
-        <Disqus.DiscussionEmbed
+        {/* <Disqus.DiscussionEmbed
           shortname={disqusShortname}
           config={disqusConfig}
-        />
+        /> */}
+        <Form method="POST" action="https://api.staticman.net/v2/entry/fuerte-nerd/gatsby-blog-with-comments/master/comments">
+          <Input type="hidden" name="options[slug]" value={markdownRemark.fields.slug} />
+          <Input name="fields[name]" placeholder="Name" required />
+          <Input name="fields[email]" type="email" placeholder="Email" required />
+          <Input name="fields[message]" type="textarea" placeholder="Comment..." required />
+          <Input type="submit">Hello</Input>
+        </Form>
       </div>
     </Container>
   )
